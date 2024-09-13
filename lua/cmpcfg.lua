@@ -69,7 +69,8 @@ require('lspconfig')['lua_ls'].setup {
 
 -- C#
 require('lspconfig')['omnisharp'].setup {
-  capabilities = capabilities
+  capabilities = capabilities,
+  cmd = { "omnisharp" }
 }
 
 -- GoLang
