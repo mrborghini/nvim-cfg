@@ -51,39 +51,57 @@ cmp.setup({
 
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- Enable hover documentation
+local on_attach = function(_, bufnr)
+  local opts = { noremap = true, silent = true }
 
--- Rust
+  -- Set keymap for manual hover documentation
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+
+  -- Automatically trigger hover on CursorHold
+  vim.api.nvim_create_autocmd("CursorHold", {
+    buffer = bufnr,
+    callback = function()
+      vim.lsp.buf.hover()
+    end
+  })
+end
+
+vim.opt.updatetime = 1000 -- Time in milliseconds (default is 4000)
+
+-- Add 'on_attach' to each LSP setup
 require('lspconfig')['rust_analyzer'].setup {
-  capabilities = capabilities
+  capabilities = capabilities,
+  on_attach = on_attach
 }
 
--- C and C++
 require('lspconfig')['clangd'].setup {
-  capabilities = capabilities
+  capabilities = capabilities,
+  on_attach = on_attach
 }
 
--- Lua
 require('lspconfig')['lua_ls'].setup {
-  capabilities = capabilities
+  capabilities = capabilities,
+  on_attach = on_attach
 }
 
--- C#
 require('lspconfig')['omnisharp'].setup {
   capabilities = capabilities,
-  cmd = { "omnisharp" }
+  cmd = { "omnisharp" },
+  on_attach = on_attach
 }
 
--- GoLang
 require('lspconfig')['gopls'].setup {
-  capabilities = capabilities
+  capabilities = capabilities,
+  on_attach = on_attach
 }
 
--- Python
 require('lspconfig')['pyright'].setup {
-  capabilities = capabilities
+  capabilities = capabilities,
+  on_attach = on_attach
 }
 
--- Bash
 require('lspconfig')['bashls'].setup {
-  capabilities = capabilities
+  capabilities = capabilities,
+  on_attach = on_attach
 }
