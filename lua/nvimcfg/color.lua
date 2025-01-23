@@ -1,2 +1,2 @@
 -- Set the color scheme
-vim.cmd("colorscheme onedark")
+vim.cmd("colorscheme catppuccin-mocha")
