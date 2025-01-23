@@ -110,3 +110,8 @@ require('lspconfig')['gdscript'].setup {
   capabilities = capabilities,
   on_attach = on_attach
 }
+
+require('lspconfig')['svelte'].setup {
+  capabilities = capabilities,
+  on_attach = on_attach
+}
