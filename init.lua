@@ -8,5 +8,3 @@ require("nvimcfg.config")
 require("cmpcfg")
 -- UI navigation
 require("filetreecfg")
--- misc
-require("discordcfg")
